@@ -6,10 +6,19 @@
   "author": "heeyou",
   "license": "MIT",
   "dependencies": {
+    "@types/ws": "^7.4.0",
+    "concurrently": "^6.0.0",
     "graphql-yoga": "^1.18.3",
     "nodemon": "^2.0.7"
   },
+  "scripts": {
+    "start:build": "tsc -w",
+    "start:run": "nodemon --exec babel-node build/index.js",
+    "start": "concurrently yarn:start:*"
+  },
   "devDependencies": {
-    "babel-node": "^0.0.1-security"
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-stage-3": "^6.24.1"
   }
 }
