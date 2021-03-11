@@ -1,32 +1,48 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.people = [
+exports.movies = [
     {
         id: 1,
-        name: 'heeyou',
-        age: 28,
-        gender: 'female',
+        name: '미나리',
+        audiAcc: '276870',
     },
     {
         id: 2,
-        name: 'hee',
-        age: 18,
-        gender: 'male',
+        name: '라야와 마지막 드래곤',
+        audiAcc: '127006',
     },
     {
         id: 3,
-        name: 'you',
-        age: 25,
-        gender: 'female',
+        name: '극장판 귀멸의 칼날: 무한열차편',
+        audiAcc: '1052396',
     },
     {
         id: 4,
-        name: 'hemin',
-        age: 28,
-        gender: 'female',
+        name: '소울',
+        audiAcc: '1965137',
     },
 ];
+exports.getMovies = function () { return exports.movies; };
 exports.getById = function (id) {
-    var filterdPeople = exports.people.filter(function (person) { return id === person.id; });
-    return filterdPeople[0];
+    return exports.movies.filter(function (movie) { return id === movie.id; })[0];
+};
+exports.deleteMovie = function (id) {
+    var cleanedMovies = exports.movies.filter(function (movie) { return movie.id !== id; });
+    if (exports.movies.length > cleanedMovies.length) {
+        exports.movies = cleanedMovies;
+        return true;
+    }
+    else {
+        return false;
+    }
+};
+exports.addMovie = function (name, audiAcc) {
+    var id = exports.movies.length + 1;
+    var newMovie = {
+        id: id,
+        name: name,
+        audiAcc: audiAcc,
+    };
+    exports.movies.push(newMovie);
+    return newMovie;
 };
