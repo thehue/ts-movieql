@@ -1,13 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var person = {
-    name: 'heeyou',
-    age: 28,
-    gender: 'female',
-};
+var db_1 = require("./db");
 var resolvers = {
     Query: {
-        person: function () { return person; },
+        people: function () { return db_1.people; },
+        person: function (_, args) {
+            var id = args.id;
+            return db_1.getById(id);
+        },
     },
 };
 exports.default = resolvers;
