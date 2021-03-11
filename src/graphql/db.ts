@@ -1,20 +1,48 @@
-import fetch from 'node-fetch';
+import axios from 'axios';
+const BASE_URL = 'https://yts.mx/api/v2/';
+const LIST_MOVIES_URL = `${BASE_URL}list_movies.json`;
+const MOVIE_DETAIL_URL = `${BASE_URL}movie_details.json`;
+const MOVIE_SUGGESTION_URL = `${BASE_URL}movie_suggestions.json`;
 
-const API_URL = 'https://yts.mx/api/v2/list_movies.json?';
+export const getMovies = async (limit?: number, rating?: number) => {
+  const {
+    data: {
+      data: { movies },
+    },
+  } = await axios(LIST_MOVIES_URL, {
+    params: {
+      limit,
+      minimum_rating: rating,
+    },
+  });
 
-//limit, rating
-export const getMovies = (limit?: number, rating?: number) => {
-  let REQUEST_URL = API_URL;
-  if (!limit) {
-    limit = 10; //default 개수
-  }
-  REQUEST_URL += `limit=${limit}`;
+  return movies;
+};
 
-  if (rating) {
-    REQUEST_URL += `&minimum_rating=${rating}`;
-  }
+export const getMovie = async (id: number) => {
+  const {
+    data: {
+      data: { movie },
+    },
+  } = await axios(MOVIE_DETAIL_URL, {
+    params: {
+      movie_id: id,
+    },
+  });
 
-  return fetch(`${REQUEST_URL}`)
-    .then((res) => res.json())
-    .then((json) => json.data.movies);
+  return movie;
+};
+
+export const getSuggestions = async (id: number) => {
+  const {
+    data: {
+      data: { movies },
+    },
+  } = await axios(MOVIE_SUGGESTION_URL, {
+    params: {
+      movie_id: id,
+    },
+  });
+
+  return movies;
 };
