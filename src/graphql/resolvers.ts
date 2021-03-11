@@ -1,26 +1,13 @@
-import { getMovies, getById, addMovie } from './db';
+import { getMovies } from './db';
 
 type Params = {
-  id: number;
-};
-
-type AddPrams = {
-  name: string;
-  audiAcc: string;
+  limit?: number;
+  rating?: number;
 };
 
 const resolvers = {
   Query: {
-    movies: () => getMovies(),
-    movie: (_: any, args: Params) => {
-      const { id } = args;
-      return getById(id);
-    },
-  },
-  Mutation: {
-    addMovie: (_: any, { name, audiAcc }: AddPrams) => {
-      return addMovie(name, audiAcc);
-    },
+    movies: (_: any, { limit, rating }: Params) => getMovies(limit, rating),
   },
 };
 

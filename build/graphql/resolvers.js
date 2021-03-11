@@ -3,16 +3,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var db_1 = require("./db");
 var resolvers = {
     Query: {
-        movies: function () { return db_1.getMovies(); },
-        movie: function (_, args) {
-            var id = args.id;
-            return db_1.getById(id);
-        },
-    },
-    Mutation: {
-        addMovie: function (_, _a) {
-            var name = _a.name, audiAcc = _a.audiAcc;
-            return db_1.addMovie(name, audiAcc);
+        movies: function (_, _a) {
+            var limit = _a.limit, rating = _a.rating;
+            return db_1.getMovies(limit, rating);
         },
     },
 };
